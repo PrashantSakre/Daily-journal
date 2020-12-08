@@ -100,6 +100,7 @@ app.get("/posts/:postId",function(req, res) {
     
       console.log(foundPost);
       res.render("post", {
+        id: foundPost._id,
         title: foundPost.title,
         content: foundPost.content
       });
@@ -107,6 +108,22 @@ app.get("/posts/:postId",function(req, res) {
   });
 
 });
+
+//---- Delete post user clicked Section ----//
+app.post("/posts/:postId", function(req, res) {
+  const requestedPostId = req.params.postId;
+  console.log(requestedPostId);
+
+  Post.findOneAndDelete({_id: requestedPostId}, function(err, deletePost) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(deletePost);
+      res.redirect("/");
+    }
+  });
+});
+
 
 app.post("/posts", function(req, res) {
   
@@ -117,9 +134,17 @@ app.get("/login", function(req, res) {
   res.render("signin");
 });
 
+app.post("/login", function(req, res) {
+  console.log(req.body);
+});
+
 // Register section
 app.get("/register", function(req, res) {
   res.render("register");
+});
+
+app.post("/register",  function(req, res) {
+  console.log(req.body);
 });
 
 

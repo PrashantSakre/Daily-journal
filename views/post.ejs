@@ -3,6 +3,9 @@
     
         <h1><%= title%> </h1>
         <p><%= content %> </p>
-   
+        <form action="/posts/<%= id %>" method="POST">
+                <button type="submit" class="btn btn-default" >Delete this post</button>
+        </form>
+
 
 <%- include('partials/footer'); -%> 
