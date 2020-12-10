@@ -20,7 +20,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 //Database connect
-mongoose.connect("mongodb://localhost:27017/blogDB", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://localhost:27017/blogDB", { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Mongodb connected...."))
+  .catch(err => console.log(err));
 
 const postSchema = {
   title: String,
