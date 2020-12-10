@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.use(session({
-  secret: "little secrete",
+  secret: process.env.SECRETE,
   resave: false,
   saveUninitialized: false
 }));
@@ -212,7 +212,6 @@ app.post("/users/register",  function(req, res) {
       res.redirect("/users/register");
     } else {
       passport.authenticate("local")(req, res, function() {
-        console.log(req.body);
         res.redirect("/home");
       });
     }
