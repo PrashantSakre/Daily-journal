@@ -1,18 +1,18 @@
 <%- include('partials/header'); -%> 
 
-    <h1>Home</h1>
+    <h1><%= user %>'s  Home</h1>
     <p><%= startingContent %></p>
 
     <div class="row">
         <div class="col-md-6">
             <% posts.forEach(function(post) { %>
                 <h3><%= post.title %> </h3>
-                <p class="postContent"><%= post.content.substring(0,50) %>...<a href="/posts/<%= post._id %>">Read more</a> </p>
+                <p class="postContent"><%= post.content.substring(0,50) %>...<a href="/posts/<%= user %>/<%= post._id %>">Read more</a> </p>
             <% }); %>
         </div>
         <div class="col-md-6">
                 <h3>Compose your Journal</h3>
-                <a class="btn btn-primary" href="/compose" role="button">Compose</a>
+                <a class="btn btn-primary" href="/user/<%= user %>/compose" role="button">Compose</a>
         </div>
     </div>
 
