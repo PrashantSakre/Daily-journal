@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 //Database connect
-mongoose.connect("mongodb+srv://admin-prashant:Prashant-kung@cluster0.fvoz1.mongodb.net/blogDB1", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb+srv://admin-prashant:Prashant-kung@cluster0.po1ak.mongodb.net/blogDB1", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Mongodb connected...."))
   .catch(err => console.log(err));
 
