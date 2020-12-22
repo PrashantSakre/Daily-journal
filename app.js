@@ -29,7 +29,8 @@ mongoose.connect("mongodb://localhost:27017/blogDB1", { useNewUrlParser: true, u
 // Post Schema
 const postSchema = {
   title: { type: String, required: false, unique: false},
-  content: { type: String, required: false }
+  content: { type: String, required: false },
+  postsDate: { type: Date, default: Date.now }
 };
 
 const Post = mongoose.model("Post", postSchema);
@@ -54,6 +55,14 @@ app.get("/user/:userName", function(req, res) {
       console.log(err);
     } else {
       if (foundUser.isloggedin) {
+        setTimeout(function(){
+          foundUser.isloggedin = false;
+          foundUser.save(function(err) {
+            if (err) {
+              console.log(err);
+            }
+          })
+        }, 300000);
         res.render("home", {
           startingContent: homeStartingContent,
           posts: foundUser.posts,
@@ -69,14 +78,38 @@ app.get("/user/:userName", function(req, res) {
 });
 
 app.post("/", function(req, res) {
-
+  
 
 });
 
 
 //---   About Section   -------//
-app.get("/about", function(req, res) {
-  res.render("about", { aboutContent: aboutContent })
+app.get("/user/:userName/about", function(req, res) {
+  const requestedUserName = req.params.userName;
+
+  User.findOne({name: requestedUserName}, function(err, foundUser){
+    if (err) {
+      console.log(err);
+    } else {
+      if (foundUser.isloggedin) {
+        setTimeout(function(){
+          foundUser.isloggedin = false;
+          foundUser.save(function(err) {
+            if (err) {
+              console.log(err);
+            }
+          })
+        }, 300000);
+        res.render("about", {
+          aboutContent: aboutContent,
+          user: foundUser.name
+        });
+      } else {
+        console.log("user not logged in");
+        res.render("error");
+      }
+    }
+  });
 
 });
 
@@ -86,8 +119,33 @@ app.post("/about", function(req, res) {
 })
 
 //---   Contact Section   -------//
-app.get("/contact", function(req, res) {
-  res.render("contact", { contactContent: contactContent });
+app.get("/user/:userName/contact", function(req, res) {
+  const requestedUserName = req.params.userName;
+
+  User.findOne({name: requestedUserName}, function(err, foundUser){
+    if (err) {
+      console.log(err);
+    } else {
+      if (foundUser.isloggedin) {
+        setTimeout(function(){
+          foundUser.isloggedin = false;
+          foundUser.save(function(err) {
+            if (err) {
+              console.log(err);
+            }
+          })
+        }, 300000);
+        res.render("contact", {
+          contactContent : contactContent,
+          user: foundUser.name
+        });
+      } else {
+        console.log("user not logged in");
+        res.render("error");
+      }
+    }
+  });
+
 
 });
 
@@ -104,6 +162,14 @@ app.get("/user/:userName/compose", function(req, res) {
       console.log(err);
     } else {
       if (foundUser.isloggedin) {
+        setTimeout(function(){
+          foundUser.isloggedin = false;
+          foundUser.save(function(err) {
+            if (err) {
+              console.log(err);
+            }
+          })
+        }, 300000);
         res.render("compose", {
           user: foundUser.name
         })
@@ -153,20 +219,27 @@ app.get("/posts/:userName/:postId",function(req, res) {
   const requestedUserName = req.params.userName;
 
   const requestedPostId = req.params.postId;
-  console.log(requestedPostId);
 
   User.findOne({name: requestedUserName}, function(err, foundUser){
     if (err) {
       console.log(err);
     } else {
       if (foundUser.isloggedin) {
+        setTimeout(function(){
+          foundUser.isloggedin = false;
+          foundUser.save(function(err) {
+            if (err) {
+              console.log(err);
+            }
+          })
+        }, 300000);
         posts = foundUser.posts.id(requestedPostId);
-        console.log(posts);
         res.render("post", {
           user: foundUser.name,
           id: posts._id,
           title: posts.title,
-          content: posts.content
+          content: posts.content,
+          date: posts.postsDate.toString()
         });
 
       } else {
@@ -226,7 +299,9 @@ app.post("/login", function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      if (!founduser.isloggedin) {
+      if (founduser == null) {
+        res.render("error");
+      } else if (!founduser.isloggedin || founduser.isloggedin) {
         bcrypt.compare(password, founduser.password, function(err, result) {
           // result == true
           if ( result === true ) {
