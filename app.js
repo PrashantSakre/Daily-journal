@@ -46,6 +46,10 @@ const userSchema = new mongoose.Schema({
 
 const User = new mongoose.model("User", userSchema);
 
+app.get("/", function(req, res) {
+  res.redirect("/login");
+})
+
 //----    Root route Section   ------//
 app.get("/user/:userName", function(req, res) {
   const requestedUserName = req.params.userName;
