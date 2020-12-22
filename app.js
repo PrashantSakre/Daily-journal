@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 //Database connect
-mongoose.connect("mongodb://localhost:27017/blogDB1", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb+srv://admin-prashant:Prashant-kung@cluster0.fvoz1.mongodb.net/blogDB1", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Mongodb connected...."))
   .catch(err => console.log(err));
 
@@ -69,7 +69,6 @@ app.get("/user/:userName", function(req, res) {
           user: foundUser.name
         });
       } else {
-        console.log("user not logged in");
         res.render("error");
       }
     }
@@ -105,7 +104,6 @@ app.get("/user/:userName/about", function(req, res) {
           user: foundUser.name
         });
       } else {
-        console.log("user not logged in");
         res.render("error");
       }
     }
@@ -140,7 +138,6 @@ app.get("/user/:userName/contact", function(req, res) {
           user: foundUser.name
         });
       } else {
-        console.log("user not logged in");
         res.render("error");
       }
     }
@@ -174,7 +171,6 @@ app.get("/user/:userName/compose", function(req, res) {
           user: foundUser.name
         })
       } else {
-        console.log("user not logged in");
         res.render("error");
       }
     }
@@ -204,7 +200,6 @@ app.post("/user/:userName/compose", function(req, res) {
         });
 
       } else {
-        console.log("user not logged in");
         res.render("error");
       }
     }
@@ -243,7 +238,6 @@ app.get("/posts/:userName/:postId",function(req, res) {
         });
 
       } else {
-        console.log("user not logged in");
         res.render("error");
       }
     }
@@ -256,7 +250,6 @@ app.post("/posts/:userName/:postId", function(req, res) {
   const requestedUserName = req.params.userName;
 
   const requestedPostId = req.params.postId;
-  console.log(requestedPostId);
 
   User.findOne({name: requestedUserName}, function(err, foundUser){
     if (err) {
@@ -272,7 +265,6 @@ app.post("/posts/:userName/:postId", function(req, res) {
         });
 
       } else {
-        console.log("user not logged in");
         res.render("error");
       }
     }
@@ -291,7 +283,6 @@ app.get("/login", function(req, res) {
 });
 
 app.post("/login", function(req, res) {
-  console.log(req.body);
   const useremail = req.body.useremail;
   const password = req.body.userpassword;
 
@@ -312,7 +303,6 @@ app.post("/login", function(req, res) {
           }
         });
       } else {
-        console.log("login credintial false");
         res.render("error");
       }
     }
@@ -336,7 +326,6 @@ app.get("/user/:userName/logout", function(req, res) {
           }
         });
       } else {
-        console.log("user not logged in");
         res.render("error");
       }
     }
@@ -350,7 +339,6 @@ app.get("/register", function(req, res) {
 });
 
 app.post("/register",  function(req, res) {
-  console.log(req.body);
   bcrypt.hash(req.body.userpassword, saltRounds, function(err, hash) {
     const newUser = new User({
         name: req.body.username,
