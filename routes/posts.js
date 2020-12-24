@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 var User = require("../models/user");
 
+//---- route to the posts   ----//
 router
   .route("/:userName/:postId")
   .get(function (req, res) {

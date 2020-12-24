@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const _ = require("lodash");
 const PORT = process.env.PORT || 3000;
 
-
+// reuire routes from routes folder
 const register = require("./routes/register");
 const login = require("./routes/login");
 const users = require("./routes/users");
@@ -17,33 +17,34 @@ const posts = require("./routes/posts");
 
 const app = express();
 
+// set view engine to ejs
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-//Database connect
+//Database connect to local or mongodb Atlas
 mongoose.connect("mongodb://localhost:27017/blogDB1", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Mongodb connected...."))
   .catch(err => console.log(err));
 
-
+//--- Root route -----//
 app.get("/", function(req, res) {
   res.redirect("/login");
 });
 
-//----    Root route Section   ------//
+//---- route to the users ---//
 app.use("/user", users);
 
 
-//---- Posts Section ----//
+//---- Posts route  ----//
 app.use("/posts", posts);
 
 
-// Login - section
+//---- Login route -----//
 app.use("/login", login);
 
-// Register section
+//---- Register route  -----//
 app.use("/register", register);
 
 

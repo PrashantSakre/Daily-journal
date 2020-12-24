@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 var User = require("../models/user");
 
-// Register section
+//---- Register route   -----// 
 router
   .route("/")
   .get(function (req, res) {
