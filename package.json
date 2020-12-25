@@ -7,7 +7,7 @@
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
-  "author": "",
+  "author": "Prashant S",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",

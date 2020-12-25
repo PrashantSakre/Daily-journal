@@ -9,16 +9,20 @@ router
     res.render("signin");
   })
   .post(function (req, res) {
-    console.log(req.body);
     const useremail = req.body.useremail;
     const password = req.body.userpassword;
+    let errors = [];
 
     User.findOne({ email: useremail }, function (err, founduser) {
       if (err) {
         console.log(err);
       } else {
         if (founduser == null) {
-          res.render("error");
+          errors.push({ msg: "Entered Email is not correct"});
+            res.render("signin", {
+              errors: errors,
+              useremail: useremail
+            });
         } else if (!founduser.isloggedin || founduser.isloggedin) {
           bcrypt.compare(password, founduser.password, function (err, result) {
             // result == true
@@ -26,6 +30,13 @@ router
               founduser.isloggedin = true;
               founduser.save(function (err) {
                 res.redirect("/user/" + founduser.name);
+              });
+            } else {
+              errors.push({ msg: "Entered Password is not correct"});
+              res.render("signin", {
+                errors: errors,
+                useremail: useremail,
+                userpassword: password
               });
             }
           });
