@@ -8,7 +8,7 @@ const postSchema = {
     postsDate: { type: Date, default: Date.now }
   };
   
-  const Post = mongoose.model("Post", postSchema);
+  
   
   // UserSchema 
   const userSchema = new mongoose.Schema({

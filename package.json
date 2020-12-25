@@ -7,7 +7,7 @@
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
-  "author": "",
+  "author": "Prashant S",
   "license": "ISC",
   "engines": {
     "node": "14.15.1"

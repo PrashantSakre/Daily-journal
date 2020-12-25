@@ -1,59 +1,69 @@
-<%- include('partials/head'); -%> 
+<%- include('partials/head'); -%>
 
 <body>
     <nav class="navbar navbar-default">
         <div class="container">
-          <div class="navbar-header">
-            <p class="navbar-brand">Welcome to DAILY JOURNAL</p>
-          </div>
+            <div class="navbar-header">
+                <p class="navbar-brand">Welcome to DAILY JOURNAL</p>
+            </div>
         </div>
     </nav>
     <div class="container">
         <h2>Register</h2>
     </div>
-    
+
     <div class="container login-register">
+        <%- include('partials/errormessages'); -%>
         <form class="form-horizontal" action="/register" method="POST">
             <!-- Name field  -->
             <div class="form-group">
                 <label for="inputName" class="col-sm-2 control-label">Name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputName" placeholder="Enter" name="username">
+                    <input type="text" class="form-control" id="inputName" placeholder="Name" name="username"
+                        value="<%= typeof username != 'undefined' ? username : '' %>" />
                 </div>
             </div>
             <!-- Email field  -->
             <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Email" name="useremail">
-            </div>
+                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email" name="useremail"
+                        value="<%= typeof useremail != 'undefined' ? useremail : '' %>" />
+                </div>
             </div>
             <!-- password field  -->
             <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name="userpassword">
+                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword3" placeholder="New Password"
+                        name="userpassword1" value="<%= typeof userpassword1 != 'undefined' ? userpassword1 : '' %>" />
+                </div>
             </div>
+            <!-- password2 field  -->
+            <div class="form-group">
+                <label for="inputPassword4" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword4" placeholder="Re-enter Password"
+                        name="userpassword2" value="<%= typeof userpassword2 != 'undefined' ? userpassword2 : '' %>" />
+                </div>
             </div>
             <!-- Remember field  -->
             <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="user_remember"> Remember me
-                </label>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="user_remember" /> Remember me
+                        </label>
+                    </div>
                 </div>
-            </div>
             </div>
             <!-- Register field  -->
             <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">Register</button>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
             </div>
-            </div>
-
         </form>
     </div>
+    <div><%- include("partials/footer") -%></div>
 </body>
-
-</html>
