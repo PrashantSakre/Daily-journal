@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const _ = require("lodash");
 const PORT = process.env.PORT || 3000;
 
-// reuire routes from routes folder
+// require routes from routes folder
 const register = require("./routes/register");
 const login = require("./routes/login");
 const users = require("./routes/users");

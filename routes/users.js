@@ -170,7 +170,7 @@ router.route("/:userName/logout").get(function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      if (foundUser.isloggedin) {
+      if (foundUser.isloggedin || !foundUser.isloggedin) {
         foundUser.isloggedin = false;
         foundUser.save(function (err) {
           if (!err) {
@@ -178,7 +178,6 @@ router.route("/:userName/logout").get(function (req, res) {
           }
         });
       } else {
-        console.log("user not logged in");
         res.render("error");
       }
     }
