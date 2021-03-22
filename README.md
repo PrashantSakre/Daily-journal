@@ -2,6 +2,8 @@
 
 [Daily - Journal](http://stark-plateau-64304.herokuapp.com)
 
-## Login Using
-userid: a@a.com
-password: aaaaa
+## Use the following details to see the project or create a dummy account
+
+User id: a@a.com
+
+Password: aaaaa
