@@ -1,6 +1,6 @@
 # Daily - Journal
 
-[Daily - Journal](http://stark-plateau-64304.herokuapp.com)
+[Daily - Journal](https://daily-journal-7s6b.onrender.com/login)
 
 ## Use the following details to see the project or create a dummy account
 
