@@ -7,9 +7,13 @@
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
-  "author": "",
+  "author": "Prashant Sakre",
   "license": "ISC",
+  "engines": {
+    "node": "14.15.1"
+  },
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.3",
     "dotenv": "^8.2.0",
     "ejs": "^2.6.1",
